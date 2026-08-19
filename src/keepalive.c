@@ -207,7 +207,7 @@ int keepalive__update(struct mosquitto *context)
 	context->last_msg_in = db.now_s;
 	keepalive__add(context);
 #else
-	UNUSED(context);
+	context->last_msg_in = db.now_s;
 #endif
 	return MOSQ_ERR_SUCCESS;
 }
