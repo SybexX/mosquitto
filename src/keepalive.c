@@ -207,6 +207,10 @@ int keepalive__update(struct mosquitto *context)
 	context->last_msg_in = db.now_s;
 	keepalive__add(context);
 #else
+	/*
+     * keepalive__update() must update context->last_msg_in when using WITH_OLD_KEEPALIVE, 
+     * otherwise the legacy keepalive implementation fails to refresh the last-message timestamp.
+    */
 	context->last_msg_in = db.now_s;
 #endif
 	return MOSQ_ERR_SUCCESS;
